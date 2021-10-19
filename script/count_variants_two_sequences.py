@@ -44,7 +44,7 @@ for i in range(len(first_seq)):
     first_seq_chr = first_seq[i]
     second_seq_chr = second_seq[i]
     
-    if first_seq_chr == "N" and second_seq_chr == "N": # Hard masked region should not be considered
+    if first_seq_chr == "N" or second_seq_chr == "N": # Hard masked region should not be considered
         continue
     
     if first_seq_chr == second_seq_chr:
