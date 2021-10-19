@@ -37,7 +37,8 @@ aln_len = len(first_seq)
 count_dict = { "match" : 0,
                "mismatch" : 0,
                "insertion" : 0,
-               "deletion" : 0 }
+               "deletion" : 0,
+               "low_cov" : 0}
 indel_ongoing = False
 
 for i in range(len(first_seq)):
@@ -45,6 +46,7 @@ for i in range(len(first_seq)):
     second_seq_chr = second_seq[i]
     
     if first_seq_chr == "N" or second_seq_chr == "N": # Hard masked region should not be considered
+        count_dict["low_cov"] += 1
         continue
     
     if first_seq_chr == second_seq_chr:
@@ -73,9 +75,9 @@ for i in range(len(first_seq)):
                     indel_ongoing = True
 
 outfile = open(args.output, "w")
-header_list = ["aln_len", "match", "mismatch", "insertion", "deletion"]
+header_list = ["aln_len", "match", "mismatch", "insertion", "deletion", "low_cov"]
 header = '\t'.join(header_list) + "\n"
-result_list = [str(aln_len), str(count_dict["match"]), str(count_dict["mismatch"]), str(count_dict["insertion"]), str(count_dict["deletion"])]
+result_list = [str(aln_len), str(count_dict["match"]), str(count_dict["mismatch"]), str(count_dict["insertion"]), str(count_dict["deletion"]), str(count_dict["low_cov"])]
 result = '\t'.join(result_list) + "\n"
 
 if args.header:
