@@ -74,12 +74,14 @@ for i in range(len(first_seq)):
                     count_dict["deletion"] += 1
                     indel_ongoing = True
 
-outfile = open(args.output, "w")
+#outfile = open(args.output, "w")
 header_list = ["aln_len", "match", "mismatch", "insertion", "deletion", "low_cov"]
 header = '\t'.join(header_list) + "\n"
 result_list = [str(aln_len), str(count_dict["match"]), str(count_dict["mismatch"]), str(count_dict["insertion"]), str(count_dict["deletion"]), str(count_dict["low_cov"])]
 result = '\t'.join(result_list) + "\n"
 
-if args.header:
-    outfile.write(header)
-outfile.write(result)
+#if args.header:
+#    outfile.write(header)
+#outfile.write(result)
+#outfile.close()
+print(args.input + "\t" + result)
